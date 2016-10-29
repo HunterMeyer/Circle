@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { AppRegistry, NativeModules } from 'react-native'
+import { AppRegistry } from 'react-native'
 import AppNavigator from './app/navigation/AppNavigator'
 import { COLOR, ThemeProvider } from './node_modules/react-native-material-ui'
 
