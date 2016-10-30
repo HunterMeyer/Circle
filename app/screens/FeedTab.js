@@ -12,6 +12,7 @@ import {
 } from 'react-native'
 import { ActionButton, COLOR, Icon } from 'react-native-material-ui'
 import Container from '../shared/Container'
+import Event from './Event'
 
 export default class FeedTab extends Component {
   constructor(props) {
@@ -31,7 +32,7 @@ export default class FeedTab extends Component {
 
   renderRow(event, sectionID, rowId) {
     return (
-      <TouchableHighlight onPress={ () => this.rowPressed(event.id) } style={styles.container } underlayColor='#eee'>
+      <TouchableHighlight onPress={ () => this.rowPressed(event) } style={styles.container } underlayColor='#eee'>
         <View style={styles.cardContainer}>
           <Image source={event.image} style={styles.cardImage}>
             <View style={styles.cardTitleBackground}></View>
@@ -53,8 +54,11 @@ export default class FeedTab extends Component {
     )
   }
 
-  rowPressed(eventId) {
-
+  rowPressed(event) {
+    this.props.navigator.push({
+      screen: Event,
+      passProps: { event, navigator: this.props.navigator }
+    })
   }
 
   render() {
@@ -74,8 +78,8 @@ export default class FeedTab extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    margin: 10,
-    marginBottom: 0,
+    marginHorizontal: 10,
+    marginVertical: 5,
   },
   cardContainer: {
     margin: 2,
