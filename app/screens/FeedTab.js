@@ -74,10 +74,11 @@ export default class FeedTab extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    marginBottom: -5,
+    margin: 10,
+    marginBottom: 0,
   },
   cardContainer: {
-    margin: 10,
+    margin: 2,
     flex: 1,
     backgroundColor: '#fff',
     borderRadius: 2,
