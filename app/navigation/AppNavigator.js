@@ -1,16 +1,15 @@
 'use strict'
 
 import React, { Component } from 'react'
-import { Navigator, StyleSheet, StatusBar } from 'react-native'
+import { Navigator, StyleSheet } from 'react-native'
 import { COLOR } from 'react-native-material-ui';
 import Container from '../shared/Container'
-import routes from '../routes'
+import Main from '../screens/Main'
 
 export default class AppNavigator extends Component {
   _renderScene(route, navigator) {
     return (
       <Container>
-        <StatusBar backgroundColor={ COLOR.indigo800 } />
         <route.screen navigator={ navigator } { ...route.passProps } />
       </Container>
     )
@@ -20,8 +19,9 @@ export default class AppNavigator extends Component {
     return (
       <Navigator
         style={ styles.container }
-        initialRoute={ routes.home }
+        initialRoute={{ screen: Main, passProps: { title: 'Circle' }}}
         renderScene={ this._renderScene }
+        configureScene={(route, stack) => Navigator.SceneConfigs.FloatFromBottom }
       />
     )
   }
