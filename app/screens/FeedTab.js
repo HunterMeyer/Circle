@@ -4,6 +4,7 @@ import React, { Component } from 'react'
 import {
   View,
   Text,
+  Image,
   StyleSheet,
   ListView,
   ScrollView,
@@ -18,34 +19,41 @@ export default class FeedTab extends Component {
     const dataSource = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1.id !== r2.id })
     this.state = {
       dataSource: dataSource.cloneWithRows([
-        { id: 1, title: 'Come Get Wasted', distance: '2mi', user: 'Brad', attendees: '3' },
-        { id: 2, title: 'Watch the Game', distance: '3mi', user: 'Sharon', attendees: '5' },
-        { id: 3, title: 'Take a Hike', distance: '6mi', user: 'Denise', attendees: '6' },
-        { id: 4, title: 'Game of Thrones', distance: '7mi', user: 'Smith Family', attendees: '3' },
-        { id: 5, title: 'Super Smash Bros', distance: '8mi', user: 'Bunch a Nerds', attendees: '8' },
-        { id: 6, title: 'Spades and Hearts', distance: '10mi', user: 'Jamie', attendees: '3' }
+        { id: 1, title: 'Come Get Wasted', distance: '2mi', user: 'Brad', attendees: '3', image: require('../../img/drinking.jpg') },
+        { id: 2, title: 'Watch the Game', distance: '3mi', user: 'Sharon', attendees: '5', image: require('../../img/the-game.jpg') },
+        { id: 3, title: 'Take a Hike', distance: '6mi', user: 'Denise', attendees: '6', image: require('../../img/hike.jpg') },
+        { id: 4, title: 'Game of Thrones', distance: '7mi', user: 'Smith Family', attendees: '3', image: require('../../img/got.jpg') },
+        { id: 5, title: 'Super Smash Bros', distance: '8mi', user: 'Bunch a Nerds', attendees: '8', image: require('../../img/smash.jpg') },
+        { id: 6, title: 'Spades and Hearts', distance: '10mi', user: 'Jamie', attendees: '3', image: require('../../img/cards.jpg') },
       ])
     }
   }
 
-  renderRow(event, sectionID, rowID) {
+  renderRow(event, sectionID, rowId) {
     return (
-      <TouchableHighlight onPress={ () => this.rowPressed(event.id) } underlayColor='#dddddd'>
-        <View>
-          <View style={ styles.rowContainer }>
-            <View style={ styles.textContainer }>
-              <Text style={ styles.name }>{ event.title }</Text>
-              <Text style={ styles.distance } numberOfLines={ 1 }>{ event.distance }</Text>
-              <Text style={ styles.info } numberOfLines={ 1 }>{ event.user } - { event.attendees }</Text>
+      <TouchableHighlight onPress={ () => this.rowPressed(event.id) } style={styles.container } underlayColor='#eee'>
+        <View style={styles.cardContainer}>
+          <Image source={event.image} style={styles.cardImage}>
+            <View style={styles.cardTitleBackground}></View>
+          </Image>
+          <Text style={styles.cardTitleText} numberOfLines={ 1 }>{ event.title }</Text>
+          <View style={styles.cardDetails}>
+            <View style={styles.cardDetailItem}>
+              <Icon size={ 18 } color={ COLOR.indigo200 } name='place' /><Text style={styles.cardDetailText}>{ event.distance }</Text>
+            </View>
+            <View style={styles.cardDetailItem}>
+              <Icon size={ 18 } color={ COLOR.indigo200 } name='account-circle' /><Text style={styles.cardDetailText}>{ event.user }</Text>
+            </View>
+            <View style={styles.cardDetailItem}>
+              <Icon size={ 18 } color={ COLOR.indigo200 } name='people' /><Text style={styles.cardDetailText}>{ event.attendees }</Text>
             </View>
           </View>
-          <View style={ styles.separator } />
         </View>
       </TouchableHighlight>
     )
   }
 
-  rowPressed = (eventId) => {
+  rowPressed(eventId) {
 
   }
 
@@ -65,35 +73,50 @@ export default class FeedTab extends Component {
 }
 
 const styles = StyleSheet.create({
-  thumb: {
-    width: 80,
-    height: 80,
-    marginRight: 10
+  container: {
+    marginBottom: -5,
   },
-  textContainer: {
+  cardContainer: {
+    margin: 10,
+    flex: 1,
+    backgroundColor: '#fff',
+    borderRadius: 2,
+    elevation: 2
+  },
+  cardImage: {
+    flex: 1,
+    height: 150,
+    paddingTop: 90,
+    alignSelf: 'center',
+    resizeMode: 'cover'
+  },
+  cardTitleBackground: {
+    flex: 1,
+    backgroundColor: 'rgba(0, 0, 0, 0.54)'
+  },
+  cardTitleText: {
+    position: 'absolute',
+    top: 102,
+    left: 12,
+    right: 5,
+    fontSize: 24,
+    color: '#fff',
+    fontWeight: 'bold'
+  },
+  cardDetails: {
+    padding: 10,
+    flex: 1,
+    flexDirection: 'row',
+  },
+  cardDetailItem: {
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center',
     flex: 1
   },
-  separator: {
-    height: 1,
-    backgroundColor: '#dddddd'
-  },
-  name: {
-    fontSize: 25,
-    fontWeight: 'bold',
-    color: '#1d4288'
-  },
-  distance: {
-    fontSize: 12,
-    color: '#656565'
-  },
-  info: {
-    fontSize: 14,
-    color: '#656565',
-    marginTop: 3
-  },
-  rowContainer: {
-    flexDirection: 'row',
-    padding: 10
+  cardDetailText: {
+    marginLeft: 3,
+    fontSize: 12
   }
 })
 
