@@ -10,7 +10,7 @@ import {
   ScrollView,
   TouchableHighlight
 } from 'react-native'
-import { ActionButton, COLOR, Icon } from 'react-native-material-ui'
+import { ActionButton, COLOR, Icon, Button } from 'react-native-material-ui'
 import Container from '../shared/Container'
 import Event from './Event'
 
@@ -19,6 +19,7 @@ export default class FeedTab extends Component {
     super(props)
     const dataSource = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1.id !== r2.id })
     this.state = {
+      promptLocation: true,
       dataSource: dataSource.cloneWithRows([
         { id: 1, title: 'Come Get Wasted', distance: '2mi', user: 'Brad', attendees: '3', image: require('../../img/drinking.jpg') },
         { id: 2, title: 'Watch the Game', distance: '3mi', user: 'Sharon', attendees: '5', image: require('../../img/the-game.jpg') },
@@ -28,6 +29,36 @@ export default class FeedTab extends Component {
         { id: 6, title: 'Spades and Hearts', distance: '10mi', user: 'Jamie', attendees: '3', image: require('../../img/cards.jpg') },
       ])
     }
+  }
+
+  renderDisplay() {
+    if (this.state.promptLocation) {
+      return this.needLocationCard()
+    } else {
+      return this.resultsList()
+    }
+  }
+
+  needLocationCard() {
+    if (this.state.promptLocation) { return (
+      <TouchableHighlight underlayColor='#eee' style={styles.container }>
+        <View style={styles.cardContainer}>
+          <Image source={require('../../img/need-location.png')} style={styles.cardImage} />
+          <View style={styles.cardDetails}>
+            <Text>Get the most out of Circle by finding out what's going on near you.</Text>
+          </View>
+          <View style={styles.cardActions}>
+            <Button text='Enable Location' style={{ text: styles.cardAction }} onPress={ () => this.setState({promptLocation: false}) } />
+          </View>
+        </View>
+      </TouchableHighlight>
+    ) }
+  }
+
+  resultsList() {
+    return (
+      <ListView dataSource={ this.state.dataSource } renderRow={ this.renderRow.bind(this) } />
+    )
   }
 
   renderRow(event, sectionID, rowId) {
@@ -65,10 +96,7 @@ export default class FeedTab extends Component {
     return (
       <Container>
         <ScrollView>
-          <ListView
-            dataSource={ this.state.dataSource }
-            renderRow={ this.renderRow.bind(this) }
-          />
+          {this.renderDisplay()}
         </ScrollView>
         <ActionButton />
       </Container>
@@ -90,8 +118,9 @@ const styles = StyleSheet.create({
   },
   cardImage: {
     flex: 1,
-    height: 150,
-    paddingTop: 90,
+    width: 340,
+    height: 180,
+    paddingTop: 120,
     alignSelf: 'center',
     resizeMode: 'cover'
   },
@@ -101,7 +130,7 @@ const styles = StyleSheet.create({
   },
   cardTitleText: {
     position: 'absolute',
-    top: 102,
+    top: 132,
     left: 12,
     right: 5,
     fontSize: 24,
@@ -122,6 +151,13 @@ const styles = StyleSheet.create({
   cardDetailText: {
     marginLeft: 3,
     fontSize: 12
+  },
+  cardActions: {
+    borderTopWidth: 1,
+    borderColor: COLOR.grey200 
+  },
+  cardAction: {
+    color: COLOR.yellow700
   }
 })
 
