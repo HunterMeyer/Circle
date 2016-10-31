@@ -10,73 +10,116 @@ import {
 } from 'react-native'
 import { Toolbar, COLOR, Icon } from 'react-native-material-ui'
 import Container from '../shared/Container'
+import ParallaxScrollView from 'react-native-parallax-scroll-view';
 
 export default class Event extends Component {
   constructor(props) {
     super(props)
   }
 
+  renderToolbar(event) {
+    return (
+      <Toolbar
+        centerElement={event.title}
+        rightElement='close'
+        onRightElementPress={() => this.props.navigator.pop() }
+        style={{ container: { backgroundColor: 'rgba(0, 0, 0, 0.54)' }}}
+      />
+    )
+  }
+
+  renderUserDetails(event) {
+    return (
+      <View style={{height: 230, alignItems: 'center'}}>
+        <View style={styles.avatarContainer}>
+          <Image style={styles.avatar} source={event.avatar} />
+        </View>
+        <View>
+          <Text numberOfLines={1} style={[styles.userName, styles.highlightText]}>{event.user}</Text>
+        </View> 
+        <View style={styles.starContainer}>
+          <Icon style={[styles.star, styles.highlightText]} name='star' />
+          <Icon style={[styles.star, styles.highlightText]} name='star' />
+          <Icon style={[styles.star, styles.highlightText]} name='star' />
+          <Icon style={[styles.star, styles.highlightText]} name='star' />
+          <Icon style={[styles.star, styles.highlightText]} name='star-border' />
+        </View>
+      </View>
+    )
+  }
+
+  renderEventBackground(event) {
+    return (
+      <View style={styles.imageContainer}>
+        <Image style={styles.image} source={event.image} />
+      </View>
+    )
+  }
+
   render() {
     const event = this.props.event
     return (
-      <View style={styles.container}>
+      <Container>
         <StatusBar backgroundColor={COLOR.grey900} />
-        <Toolbar
-          centerElement={event.title}
-          rightElement='close'
-          onRightElementPress={() => this.props.navigator.pop() }
-          style={{ container: { backgroundColor: 'rgba(0, 0, 0, 0.54)', zIndex: 1000 }}}
-        />
-        <View style={styles.imageContainer}>
-          <Image style={styles.image} source={event.image} />
-        </View>
-      </View>
+        <ParallaxScrollView
+          backgroundColor={COLOR.grey900}
+          contentBackgroundColor='#eee'
+          parallaxHeaderHeight={250}
+          stickyHeaderHeight={50}
+          renderFixedHeader={() => this.renderToolbar(event) }
+          renderForeground={() => this.renderUserDetails(event) }
+          renderBackground={() => this.renderEventBackground(event) }
+          >
+          <View style={{ height: 500, padding: 10 }}>
+            <Text>Sup bro, this is where all the event details will go :)</Text>
+          </View>
+        </ParallaxScrollView>
+      </Container>
     )
   }
 }
 
 var styles = StyleSheet.create({
-  imageContainer: {
-    marginTop: -80
-  },
   container: {
     flex: 1,
     backgroundColor: '#eee'
   },
-  heading: {
-    backgroundColor: '#F8F8F8',
-  },
-  separator: {
-    height: 1,
-    marginTop: 5,
-    backgroundColor: '#DDDDDD'
-  },
   image: {
-    width: 400,
-    height: 300
+    width: null,
+    height: 250
   },
-  contact: {
-    fontSize: 15,
-    margin: 5,
-    color: '#656565'
+  avatarContainer: {
+    elevation: 2,
+    borderRadius: 100,
+    backgroundColor: '#fff',
+    padding: 5,
+    marginTop: 70
   },
-  title: {
-    fontSize: 25,
-    fontWeight: 'bold',
-    margin: 5,
-    color: '#1d4288'
+  avatar: {
+    width: 100,
+    height: 100,
+    borderRadius: 100,
+    resizeMode: 'cover'
   },
-  description: {
-    fontSize: 15,
-    margin: 10,
-    color: '#656565'
+  userName: {
+     fontSize: 22
   },
-  website: {
-    color: '#f25d25',
-    fontSize: 18,
-    margin: 10
+  starContainer: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    flexDirection: 'row'
+  },
+  star: {
+    flexDirection: 'column',
+    fontSize: 18
+  },
+  highlightText: {
+    color: '#fff',
+    textShadowColor: COLOR.grey800,
+    textShadowRadius: 6,
+    textShadowOffset: { width: 0, height: 1 }
   }
 })
-
 
 module.exports = Event
