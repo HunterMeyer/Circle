@@ -117,15 +117,12 @@ const styles = StyleSheet.create({
     elevation: 2
   },
   cardImage: {
-    flex: 1,
-    width: 340,
-    height: 180,
-    paddingTop: 120,
-    alignSelf: 'center',
-    resizeMode: 'cover'
+    width: null,
+    height: 180
   },
   cardTitleBackground: {
-    flex: 1,
+    marginTop: 120,
+    height: 60,
     backgroundColor: 'rgba(0, 0, 0, 0.54)'
   },
   cardTitleText: {
@@ -153,6 +150,7 @@ const styles = StyleSheet.create({
     fontSize: 12
   },
   cardActions: {
+    padding: 5,
     borderTopWidth: 1,
     borderColor: COLOR.grey200 
   },
