@@ -24,7 +24,7 @@ export default class Event extends Component {
         <Toolbar
           centerElement={event.title}
           rightElement='close'
-          onRightElementPress={() => this.props.navigator.pop(0) }
+          onRightElementPress={() => this.props.navigator.pop() }
           style={{ container: { backgroundColor: 'rgba(0, 0, 0, 0.54)', zIndex: 1000 }}}
         />
         <View style={styles.imageContainer}>
