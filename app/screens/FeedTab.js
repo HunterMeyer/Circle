@@ -19,14 +19,14 @@ export default class FeedTab extends Component {
     super(props)
     const dataSource = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1.id !== r2.id })
     this.state = {
-      promptLocation: true,
+      promptLocation: false,
       dataSource: dataSource.cloneWithRows([
-        { id: 1, title: 'Come Get Wasted', distance: '2mi', user: 'Brad', attendees: '3', image: require('../../img/drinking.jpg') },
-        { id: 2, title: 'Watch the Game', distance: '3mi', user: 'Sharon', attendees: '5', image: require('../../img/the-game.jpg') },
-        { id: 3, title: 'Take a Hike', distance: '6mi', user: 'Denise', attendees: '6', image: require('../../img/hike.jpg') },
-        { id: 4, title: 'Game of Thrones', distance: '7mi', user: 'Smith Family', attendees: '3', image: require('../../img/got.jpg') },
-        { id: 5, title: 'Super Smash Bros', distance: '8mi', user: 'Bunch a Nerds', attendees: '8', image: require('../../img/smash.jpg') },
-        { id: 6, title: 'Spades and Hearts', distance: '10mi', user: 'Jamie', attendees: '3', image: require('../../img/cards.jpg') },
+        { id: 1, title: 'Come Get Wasted', distance: '2mi', user: 'Brad', attendees: '3', image: require('../../img/drinking.jpg'), avatar: require('../../img/brad.jpg') },
+        { id: 2, title: 'Watch the Game', distance: '3mi', user: 'Sharon', attendees: '5', image: require('../../img/the-game.jpg'), avatar: require('../../img/sharon.jpg') },
+        { id: 3, title: 'Take a Hike', distance: '6mi', user: 'Denise', attendees: '6', image: require('../../img/hike.jpg'), avatar: require('../../img/denise.jpg') },
+        { id: 4, title: 'Game of Thrones', distance: '7mi', user: 'Smith Family', attendees: '3', image: require('../../img/got.jpg'), avatar: require('../../img/smith-family.jpeg') },
+        { id: 5, title: 'Super Smash Bros', distance: '8mi', user: 'Bunch a Nerds', attendees: '8', image: require('../../img/smash.jpg'), avatar: require('../../img/nerds.jpg') },
+        { id: 6, title: 'Spades and Hearts', distance: '10mi', user: 'Jamie', attendees: '3', image: require('../../img/cards.jpg'), avatar: require('../../img/jamie.png') },
       ])
     }
   }
@@ -74,7 +74,7 @@ export default class FeedTab extends Component {
               <Icon size={ 18 } color={ COLOR.indigo200 } name='place' /><Text style={styles.cardDetailText}>{ event.distance }</Text>
             </View>
             <View style={styles.cardDetailItem}>
-              <Icon size={ 18 } color={ COLOR.indigo200 } name='account-circle' /><Text style={styles.cardDetailText}>{ event.user }</Text>
+              <Image style={styles.cardDetailAvatar} source={event.avatar} /><Text style={styles.cardDetailText}>{ event.user }</Text>
             </View>
             <View style={styles.cardDetailItem}>
               <Icon size={ 18 } color={ COLOR.indigo200 } name='people' /><Text style={styles.cardDetailText}>{ event.attendees }</Text>
@@ -145,6 +145,11 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     flex: 1
+  },
+  cardDetailAvatar: {
+    width: 18,
+    height: 18,
+    borderRadius: 18
   },
   cardDetailText: {
     marginLeft: 3,
