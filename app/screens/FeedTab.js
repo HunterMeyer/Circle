@@ -61,7 +61,7 @@ export default class FeedTab extends Component {
     )
   }
 
-  renderRow(event, sectionID, rowId) {
+  renderRow(event) {
     return (
       <TouchableHighlight onPress={ () => this.rowPressed(event) } style={styles.container } underlayColor='#eee'>
         <View style={styles.cardContainer}>
