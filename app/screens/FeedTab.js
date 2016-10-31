@@ -19,7 +19,7 @@ export default class FeedTab extends Component {
     super(props)
     const dataSource = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1.id !== r2.id })
     this.state = {
-      promptLocation: false,
+      promptLocation: true,
       dataSource: dataSource.cloneWithRows([
         { id: 1, title: 'Come Get Wasted', distance: '2mi', user: 'Brad', attendees: '3', image: require('../../img/drinking.jpg'), avatar: require('../../img/brad.jpg') },
         { id: 2, title: 'Watch the Game', distance: '3mi', user: 'Sharon', attendees: '5', image: require('../../img/the-game.jpg'), avatar: require('../../img/sharon.jpg') },
