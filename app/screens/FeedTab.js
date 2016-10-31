@@ -86,9 +86,10 @@ export default class FeedTab extends Component {
   }
 
   rowPressed(event) {
-    this.props.navigator.push({
+    navigator = this.props.navigator
+    navigator.push({
       screen: Event,
-      passProps: { event, navigator: this.props.navigator }
+      passProps: { event, navigator }
     })
   }
 
