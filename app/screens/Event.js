@@ -38,11 +38,11 @@ export default class Event extends Component {
           <Text numberOfLines={1} style={[styles.userName, styles.highlightText]}>{event.user}</Text>
         </View> 
         <View style={styles.starContainer}>
-          <Icon style={[styles.star, styles.highlightText]} name='star' />
-          <Icon style={[styles.star, styles.highlightText]} name='star' />
-          <Icon style={[styles.star, styles.highlightText]} name='star' />
-          <Icon style={[styles.star, styles.highlightText]} name='star' />
-          <Icon style={[styles.star, styles.highlightText]} name='star-border' />
+          <Icon style={[styles.highlightText]} size={18} name='star' />
+          <Icon style={[styles.highlightText]} size={18} name='star' />
+          <Icon style={[styles.highlightText]} size={18} name='star' />
+          <Icon style={[styles.highlightText]} size={18} name='star' />
+          <Icon style={[styles.highlightText]} size={18} name='star-border' />
         </View>
       </View>
     )
@@ -106,13 +106,7 @@ var styles = StyleSheet.create({
   },
   starContainer: {
     flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    flexDirection: 'row'
-  },
-  star: {
-    flexDirection: 'column',
-    fontSize: 18
+    flexDirection: 'row',
   },
   highlightText: {
     color: '#fff',
