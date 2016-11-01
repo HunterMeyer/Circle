@@ -12,7 +12,7 @@ import {
 } from 'react-native'
 import { ActionButton, COLOR, Icon, Button } from 'react-native-material-ui'
 import Container from '../shared/Container'
-import Event from './Event'
+import ViewEvent from './ViewEvent'
 
 export default class FeedTab extends Component {
   constructor(props) {
@@ -21,12 +21,12 @@ export default class FeedTab extends Component {
     this.state = {
       promptLocation: true,
       dataSource: dataSource.cloneWithRows([
-        { id: 1, title: 'Come Get Wasted', distance: '2mi', user: 'Brad', attendees: '3', image: require('../../img/drinking.jpg'), avatar: require('../../img/brad.jpg') },
-        { id: 2, title: 'Watch the Game', distance: '3mi', user: 'Sharon', attendees: '5', image: require('../../img/the-game.jpg'), avatar: require('../../img/sharon.jpg') },
-        { id: 3, title: 'Take a Hike', distance: '6mi', user: 'Denise', attendees: '6', image: require('../../img/hike.jpg'), avatar: require('../../img/denise.jpg') },
-        { id: 4, title: 'Game of Thrones', distance: '7mi', user: 'Smith Family', attendees: '3', image: require('../../img/got.jpg'), avatar: require('../../img/smith-family.jpeg') },
-        { id: 5, title: 'Super Smash Bros', distance: '8mi', user: 'Bunch a Nerds', attendees: '8', image: require('../../img/smash.jpg'), avatar: require('../../img/nerds.jpg') },
-        { id: 6, title: 'Spades and Hearts', distance: '10mi', user: 'Jamie', attendees: '3', image: require('../../img/cards.jpg'), avatar: require('../../img/jamie.png') },
+        { id: 1, title: 'Come Get Wasted', distance: '2mi', user: 'Brad', attendees: '3', image: require('../../img/drinking.jpg'), avatar: require('../../img/brad.jpg'), posted: '30 min ago', category: 'Partying', highlights: ['21+'], description: 'What is up Circle-tons? I am bored and feel like going to grab a drink at The White Horse Bar but do not want to be the guy by himself! Come join me, first round on me!' },
+        { id: 2, title: 'Watch the Game', distance: '3mi', user: 'Sharon', attendees: '5', image: require('../../img/the-game.jpg'), avatar: require('../../img/sharon.jpg'), posted: '1 hr ago', category: 'Sports', highlights: ['21+'], description: 'Whether you are an Eagles fan or Falcons fan these birds are facing off on my big ass TV. I have a ton of beer and food. Come on over and enjoy Sunday Funday the way it was meant to be.' },
+        { id: 3, title: 'Take a Hike', distance: '6mi', user: 'Denise', attendees: '6', image: require('../../img/hike.jpg'), avatar: require('../../img/denise.jpg'), posted: '1.5 hr ago', category: 'Outdoors', highlights: ['All-Ages', 'No-Fee Trail'], description: 'It is so beautiful outside. I am getting ready to hit Rounded Bend trails because it is free-pass day. I am no expert so all skill levels welcome. Get off the couch and join me!' },
+        { id: 4, title: 'Game of Thrones', distance: '7mi', user: 'Smith Family', attendees: '3', image: require('../../img/got.jpg'), avatar: require('../../img/smith-family.jpeg'), posted: '3 hr ago', category: 'TV', highlights: ['BYOB', 'Pets Present'], description: 'Game of Thrones premiers tonight. We have some pets in case you are allergic. We have snacks, cola, and a nice tv and sound-system. Starts at 10pm.' },
+        { id: 5, title: 'Super Smash Bros', distance: '8mi', user: 'Bunch a Nerds', attendees: '8', image: require('../../img/smash.jpg'), avatar: require('../../img/nerds.jpg'), posted: '3.5 hr ago', category: 'Games', highlights: ['BYOC', 'Drinks Provided'], description: 'All right you game-nuts. We got Super Smash Bros. Melee on GameCube. Lets have a tournament. Bring your own controller. We have drinks covered.' },
+        { id: 6, title: 'Spades and Hearts', distance: '10mi', user: 'Jamie', attendees: '3', image: require('../../img/cards.jpg'), avatar: require('../../img/jamie.png'), posted: '4 hr ago', category: 'Games', highlights: ['All-Ages', 'Food/Drink Provided'], description: 'We are new to the neighborhood. Come introduce yourself by playing some card games. All-ages welcome - we have children present. We also have food and drinks.' },
       ])
     }
   }
@@ -88,7 +88,7 @@ export default class FeedTab extends Component {
   rowPressed(event) {
     navigator = this.props.navigator
     navigator.push({
-      screen: Event,
+      screen: ViewEvent,
       passProps: { event, navigator }
     })
   }
