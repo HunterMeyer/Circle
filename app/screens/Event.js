@@ -30,11 +30,13 @@ export default class Event extends Component {
 
   renderUserDetails(event) {
     return (
-      <View style={{height: 230, alignItems: 'center'}}>
+      <View style={{height: 250, alignItems: 'center' }}>
         <View style={styles.avatarContainer}>
-          <Image style={styles.avatar} source={event.avatar} />
+          <View style={styles.avatarBackground}>
+            <Image style={styles.avatar} source={event.avatar} />
+          </View>
         </View>
-        <View>
+        <View style={styles.userNameContainer}>
           <Text numberOfLines={1} style={[styles.userName, styles.highlightText]}>{event.user}</Text>
         </View> 
         <View style={styles.starContainer}>
@@ -89,11 +91,15 @@ var styles = StyleSheet.create({
     height: 250
   },
   avatarContainer: {
+    flex: 5,
+    flexDirection: 'row',
+    alignItems: 'flex-end'
+  },
+  avatarBackground: {
     elevation: 2,
     borderRadius: 100,
     backgroundColor: '#fff',
-    padding: 5,
-    marginTop: 70
+    padding: 5
   },
   avatar: {
     width: 100,
@@ -101,12 +107,18 @@ var styles = StyleSheet.create({
     borderRadius: 100,
     resizeMode: 'cover'
   },
+  userNameContainer: {
+    flex: 1,
+    flexDirection: 'row',
+    alignItems: 'center'
+  },
   userName: {
      fontSize: 22
   },
   starContainer: {
     flex: 1,
     flexDirection: 'row',
+    alignItems: 'flex-start'
   },
   highlightText: {
     color: '#fff',
