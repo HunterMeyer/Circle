@@ -13,5 +13,10 @@ cd Circle
 
 For the next steps you'll want to keep Terminal open and make sure you're in the Circle directory.
 
-## Next step is to setup the dependencies for this app
+## Next step is to install React Native and probably Android Studio and XCode
 It's easier to read [React-Native's documentation](http://facebook.github.io/react-native/docs/getting-started.html) to figure this out.
+
+## Once you have that installed install the dependencies
+```
+npm install
+```
